@@ -69,16 +69,18 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
 
   if (!isOpen || !cabin) return null;
 
+  const cabinImages = cabin.images || [];
+
   const nextImage = () => {
-    if (cabin.images.length > 0) {
-      setCurrentImageIndex((prev) => (prev + 1) % cabin.images.length);
+    if (cabinImages.length > 0) {
+      setCurrentImageIndex((prev) => (prev + 1) % cabinImages.length);
     }
   };
 
   const prevImage = () => {
-    if (cabin.images.length > 0) {
+    if (cabinImages.length > 0) {
       setCurrentImageIndex(
-        (prev) => (prev - 1 + cabin.images.length) % cabin.images.length,
+        (prev) => (prev - 1 + cabinImages.length) % cabinImages.length,
       );
     }
   };
@@ -110,20 +112,20 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
 
           {/* Left Side: Image Gallery */}
           <div className="w-full md:w-1/2 bg-stone-100 relative flex flex-col h-[40vh] md:h-full group">
-            {cabin.images.length > 0 ? (
+            {cabinImages.length > 0 ? (
               <div
                 className="relative flex-grow overflow-hidden cursor-zoom-in"
                 onClick={() => setIsViewerOpen(true)}
               >
                 <img
-                  src={cabin.images[currentImageIndex]}
+                  src={cabinImages[currentImageIndex]}
                   alt={cabin.name}
                   className="w-full h-full object-cover"
                 />
 
                 {/* Photo Counter Badge */}
                 <div className="absolute bottom-4 left-4 bg-black/60 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-md pointer-events-none border border-white/10 shadow-sm">
-                  {currentImageIndex + 1} / {cabin.images.length}
+                  {currentImageIndex + 1} / {cabinImages.length}
                 </div>
 
                 {/* Fullscreen Icon Hint */}
@@ -160,9 +162,9 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
             )}
 
             {/* Thumbnails strip */}
-            {cabin.images.length > 0 && (
+            {cabinImages.length > 0 && (
               <div className="h-20 bg-primary/5 flex overflow-x-auto snap-x scrollbar-hide">
-                {cabin.images.map((img, idx) => (
+                {cabinImages.map((img, idx) => (
                   <button
                     key={idx}
                     ref={(el) => {
@@ -329,7 +331,7 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
       <ImageViewer
         isOpen={isViewerOpen}
         onClose={() => setIsViewerOpen(false)}
-        images={cabin.images}
+        images={cabinImages}
         initialIndex={currentImageIndex}
       />
     </>

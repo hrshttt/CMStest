@@ -25,6 +25,29 @@ collections:
           - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
           - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
           - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+          - label: "Cabins List"
+            name: "cabinsList"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Name", name: "name", widget: "string", required: false }
+              - { label: "Sleeps", name: "sleeps", widget: "string", required: false }
+              - { label: "Bedrooms", name: "bedrooms", widget: "string", required: false }
+              - { label: "Baths", name: "baths", widget: "number", value_type: "float", required: false }
+              - { label: "Description", name: "desc", widget: "text", required: false }
+              - { label: "Status", name: "status", widget: "select", options: ["Available", "Coming Soon", "Booked"], required: false }
+              - { label: "Square Footage", name: "sqFt", widget: "string", required: false }
+              - { label: "Location", name: "location", widget: "string", required: false }
+              - { label: "Features", name: "features", widget: "list", field: { label: "Feature", name: "feature", widget: "string" }, required: false }
+              - label: "Sleeping Arrangements"
+                name: "sleepingArrangements"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Room", name: "room", widget: "string", required: false }
+                  - { label: "Bed", name: "bed", widget: "string", required: false }
+              - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
+              - { label: "Booking Link", name: "bookingLink", widget: "string", required: false }
           - { label: "Intro Title", name: "introTitle", widget: "string", required: false }
           - { label: "Intro Body", name: "introBody", widget: "text", required: false }
       - file: "public/content/comfort.json"

@@ -258,6 +258,8 @@ const CabinCollection: React.FC = () => {
       .catch((err) => console.error("CMS content not found, using defaults.", err));
   }, []);
 
+  const displayCabins = cmsData?.cabinsList?.length > 0 ? cmsData.cabinsList : cabins;
+
   const openModal = (cabin: CabinData) => {
     setSelectedCabin(cabin);
   };
@@ -307,8 +309,9 @@ const CabinCollection: React.FC = () => {
       {/* Cabins Grid */}
       <section className="container mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {cabins.map((cabin, idx) => {
-            const hasImages = cabin.images.length > 0;
+          {displayCabins.map((cabin: CabinData, idx: number) => {
+            const cabinImages = cabin.images || [];
+            const hasImages = cabinImages.length > 0;
             return (
               <div
                 key={cabin.id}
@@ -319,7 +322,7 @@ const CabinCollection: React.FC = () => {
                 <div className="relative h-80 overflow-hidden bg-stone-100">
                   {hasImages ? (
                     <img
-                      src={cabin.images[0]}
+                      src={cabinImages[0]}
                       alt={cabin.name}
                       className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${cabin.status === "Coming Soon" ? "grayscale-[30%]" : ""}`}
                     />
