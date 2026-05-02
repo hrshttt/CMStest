@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "public/content/home.json"
+        label: "Home Page"
+        name: "home"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string", default: "East Pointe" }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Lake Cabin Experience" }
+          - { label: "Philosophy Title", name: "philosophyTitle", widget: "string", default: "Discover the perfect lake escape" }
+          - { label: "Philosophy Body", name: "philosophyBody", widget: "text", default: "East Pointe isn't just a destination; it's a feeling..." }
+      - file: "public/content/cabins.json"
+        label: "Cabins Page"
+        name: "cabins"
+        fields:
+          - { label: "Title", name: "title", widget: "string", default: "Our Cabins" }
+          - { label: "Description", name: "description", widget: "text" }
