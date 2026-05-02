@@ -221,7 +221,7 @@ const Home: React.FC = () => {
       {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden">
         <img
-          src="/Home/LandingImage.avif"
+          src={cmsData?.heroImage || "/Home/LandingImage.avif"}
           alt="East Pointe Luxury Cabins"
           className="absolute inset-0 w-full h-full object-cover animate-scale-in"
         />

@@ -15,6 +15,7 @@ collections:
         fields:
           - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
           - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
           - { label: "Philosophy Title", name: "philosophyTitle", widget: "string", required: false }
           - { label: "Philosophy Body", name: "philosophyBody", widget: "text", required: false }
       - file: "public/content/cabins.json"
