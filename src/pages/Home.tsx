@@ -114,6 +114,14 @@ const CAROUSEL_ITEMS = [
 const Home: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/home.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
 
   // Initialize scroll position to the middle set on load
   useEffect(() => {
@@ -223,10 +231,10 @@ const Home: React.FC = () => {
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4 animate-fade-in-up">
           <h1 className="text-5xl md:text-8xl font-serif font-bold mb-6 tracking-tight drop-shadow-lg">
-            East Pointe
+            {cmsData?.heroTitle || "East Pointe"}
           </h1>
           <p className="text-xl md:text-2xl font-light tracking-widest text-stone-100 drop-shadow-md max-w-2xl mx-auto uppercase">
-            Lake Cabin Experience
+            {cmsData?.heroSubtitle || "Lake Cabin Experience"}
           </p>
         </div>
 
@@ -244,15 +252,16 @@ const Home: React.FC = () => {
               Our Philosophy
             </span>
             <h2 className="text-3xl md:text-6xl font-serif text-primary mb-10 leading-tight">
-              Discover the{" "}
-              <span className="italic text-secondary">perfect lake escape</span>
+              {cmsData?.philosophyTitle || (
+                <>
+                  Discover the <span className="italic text-secondary">perfect lake escape</span>
+                </>
+              )}
             </h2>
             <div className="w-24 h-[1px] bg-secondary mx-auto mb-10"></div>
             <p className="text-stone-500 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto">
-              East Pointe isn't just a destination; it's a feeling. We provide
-              the perfect balance of rugged nature and refined comfort, ensuring
-              that your escape into the woods doesn't mean leaving civilization
-              behind.
+              {cmsData?.philosophyBody ||
+                "East Pointe isn't just a destination; it's a feeling. We provide the perfect balance of rugged nature and refined comfort, ensuring that your escape into the woods doesn't mean leaving civilization behind."}
             </p>
             <Link
               to="/cabins"
