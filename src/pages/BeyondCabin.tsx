@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import {
   MapPin,
@@ -17,6 +17,15 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 
 const BeyondCabin: React.FC = () => {
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/beyond.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
+
   return (
     <div className="bg-stone-50">
       <SEO
@@ -26,9 +35,9 @@ const BeyondCabin: React.FC = () => {
       />
 
       <Hero
-        title="Explore the Region"
-        subtitle="Your ideal lake getaway, just a quick drive from the heart of Kansas City."
-        image="/Explore/ExploreHero.avif"
+        title={cmsData?.heroTitle || "Explore the Region"}
+        subtitle={cmsData?.heroSubtitle || "Your ideal lake getaway, just a quick drive from the heart of Kansas City."}
+        image={cmsData?.heroImage || "/Explore/ExploreHero.avif"}
         height="large"
       />
 

@@ -249,6 +249,14 @@ const cabins: CabinData[] = [
 const CabinCollection: React.FC = () => {
   const [selectedCabin, setSelectedCabin] = useState<CabinData | null>(null);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/cabins.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
 
   const openModal = (cabin: CabinData) => {
     setSelectedCabin(cabin);
@@ -267,9 +275,9 @@ const CabinCollection: React.FC = () => {
       />
 
       <Hero
-        title="Lake Cabin Collection"
-        subtitle="Discover our range of cabins designed to accommodate all group sizes, whether you're planning a cozy getaway for two or a lively retreat for a large gathering."
-        image="/Cabin/CabinHero.avif"
+        title={cmsData?.heroTitle || "Lake Cabin Collection"}
+        subtitle={cmsData?.heroSubtitle || "Discover our range of cabins designed to accommodate all group sizes, whether you're planning a cozy getaway for two or a lively retreat for a large gathering."}
+        image={cmsData?.heroImage || "/Cabin/CabinHero.avif"}
         height="large"
       />
 

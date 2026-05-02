@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import { Check, Mail, Phone, ArrowRight } from "lucide-react";
 import SEO from "../components/SEO";
 
 const BecomeFamily: React.FC = () => {
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/family.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
+
   return (
     <div className="bg-stone-50">
       <SEO
@@ -13,9 +22,9 @@ const BecomeFamily: React.FC = () => {
       />
 
       <Hero
-        title="Membership"
-        subtitle="Join our exclusive community of nature lovers and luxury seekers."
-        image="https://picsum.photos/1920/1080?random=8"
+        title={cmsData?.heroTitle || "Membership"}
+        subtitle={cmsData?.heroSubtitle || "Join our exclusive community of nature lovers and luxury seekers."}
+        image={cmsData?.heroImage || "https://picsum.photos/1920/1080?random=8"}
         height="medium"
       />
 

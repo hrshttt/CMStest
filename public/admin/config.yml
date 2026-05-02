@@ -13,13 +13,44 @@ collections:
         label: "Home Page"
         name: "home"
         fields:
-          - { label: "Hero Title", name: "heroTitle", widget: "string", default: "East Pointe" }
-          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Lake Cabin Experience" }
-          - { label: "Philosophy Title", name: "philosophyTitle", widget: "string", default: "Discover the perfect lake escape" }
-          - { label: "Philosophy Body", name: "philosophyBody", widget: "text", default: "East Pointe isn't just a destination; it's a feeling..." }
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Philosophy Title", name: "philosophyTitle", widget: "string", required: false }
+          - { label: "Philosophy Body", name: "philosophyBody", widget: "text", required: false }
       - file: "public/content/cabins.json"
         label: "Cabins Page"
         name: "cabins"
         fields:
-          - { label: "Title", name: "title", widget: "string", default: "Our Cabins" }
-          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+          - { label: "Intro Title", name: "introTitle", widget: "string", required: false }
+          - { label: "Intro Body", name: "introBody", widget: "text", required: false }
+      - file: "public/content/comfort.json"
+        label: "Comfort & Convenience Page"
+        name: "comfort"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - file: "public/content/gather.json"
+        label: "Gather & Connect Page"
+        name: "gather"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - file: "public/content/beyond.json"
+        label: "Beyond the Cabin Page"
+        name: "beyond"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - file: "public/content/family.json"
+        label: "Become Family Page"
+        name: "family"
+        fields:
+          - { label: "Hero Title", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }

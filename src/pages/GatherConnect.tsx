@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import {
   MapPin,
@@ -15,6 +15,15 @@ import {
 import SEO from "../components/SEO";
 
 const GatherConnect: React.FC = () => {
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/gather.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
+
   return (
     <div className="bg-stone-50">
       <SEO
@@ -24,9 +33,9 @@ const GatherConnect: React.FC = () => {
       />
 
       <Hero
-        title="Gather & Celebrate"
-        subtitle="Create lasting memories in the heart of nature."
-        image="/Community/CommunityHero.avif"
+        title={cmsData?.heroTitle || "Gather & Celebrate"}
+        subtitle={cmsData?.heroSubtitle || "Create lasting memories in the heart of nature."}
+        image={cmsData?.heroImage || "/Community/CommunityHero.avif"}
         height="large"
       />
 

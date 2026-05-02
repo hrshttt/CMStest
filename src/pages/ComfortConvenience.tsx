@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import {
   Wifi,
@@ -87,6 +87,15 @@ const amenities = [
 ];
 
 const ComfortConvenience: React.FC = () => {
+  const [cmsData, setCmsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/content/comfort.json")
+      .then((res) => res.json())
+      .then((data) => setCmsData(data))
+      .catch((err) => console.error("CMS content not found, using defaults.", err));
+  }, []);
+
   return (
     <div className="bg-stone-50">
       <SEO
@@ -96,9 +105,9 @@ const ComfortConvenience: React.FC = () => {
       />
 
       <Hero
-        title="Guest Perks"
-        subtitle="We've thought of everything, so you don't have to."
-        image="/Amenities/AmenitiesHero.jpeg"
+        title={cmsData?.heroTitle || "Guest Perks"}
+        subtitle={cmsData?.heroSubtitle || "We've thought of everything, so you don't have to."}
+        image={cmsData?.heroImage || "/Amenities/AmenitiesHero.jpeg"}
         height="large"
       />
 
